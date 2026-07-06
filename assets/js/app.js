@@ -103,7 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       versionsRequested = true;
-      fetch('https://slicer-packages.kitware.com/api/v1/app/5f4474d0e1d8c75dfc705482/release')
+      // Declare the target as a public address so Chrome does not show the
+      // "Access other devices on your local network" (Local Network Access)
+      // permission prompt for this cross-origin request.
+      fetch('https://slicer-packages.kitware.com/api/v1/app/5f4474d0e1d8c75dfc705482/release', { targetAddressSpace: 'public' })
         .then(response => response.json())
         .then(releases => {
           const versions = releases
